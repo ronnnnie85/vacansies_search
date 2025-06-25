@@ -21,11 +21,11 @@ class Vacancy:
         }
         if not self.__validation(dct_params):
             raise ValueError("Invalid parameters")
-        self.__job_title = dct_params["job_title"]
-        self.__link_to_the_vacancy = dct_params["link_to_the_vacancy"]
-        self.__salary = dct_params["salary"]
-        self.__description = dct_params["description"]
-        self.__id = int(dct_params["id"])
+        self.__job_title = dct_params.get("job_title", "")
+        self.__link_to_the_vacancy = dct_params.get("link_to_the_vacancy", "")
+        self.__salary = dct_params.get("salary", 0)
+        self.__description = dct_params.get("description", "")
+        self.__id = int(dct_params.get("id", 0))
 
     def cast_to_dict(self):
         """Делаем объект словарем"""
@@ -67,13 +67,13 @@ class Vacancy:
 
     @staticmethod
     def __validation(dct_params: dict):
-        if not dct_params["job_title"] or not dct_params["id"]:
+        if not dct_params.get("job_title") or not dct_params.get("id"):
             return False
         dct_params["link_to_the_vacancy"] = (
-            dct_params["link_to_the_vacancy"] if dct_params["link_to_the_vacancy"] else ""
+            dct_params.get("link_to_the_vacancy") if dct_params.get("link_to_the_vacancy") else ""
         )
-        dct_params["salary"] = dct_params["salary"] if dct_params["salary"] else 0
-        dct_params["description"] = dct_params["description"] if dct_params["description"] else ""
+        dct_params["salary"] = dct_params.get("salary") if dct_params.get("salary") else 0
+        dct_params["description"] = dct_params.get("description") if dct_params.get("description") else ""
         return True
 
 
@@ -100,6 +100,8 @@ class Vacancy:
     def __le__(self, other):
         if isinstance(other, Vacancy):
             return self.__salary <= other.salary
+        elif isinstance(other, int) or isinstance(other, float):
+            return self.__salary <= other
         else:
             raise TypeError("Несовпадающие типы данных")
 
@@ -107,6 +109,8 @@ class Vacancy:
         """сравнение меньше или равно"""
         if isinstance(other, Vacancy):
             return self.__salary >= other.salary
+        elif isinstance(other, int) or isinstance(other, float):
+            return self.__salary >= other
         else:
             raise TypeError("Несовпадающие типы данных")
 
