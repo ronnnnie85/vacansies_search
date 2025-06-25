@@ -15,7 +15,7 @@ class JsonSaver(Saver):
 
 
     def add_vacancy(self, vacancy: Vacancy) -> None:
-        json_data = open_file_read(self.file_name)
+        json_data = self.open_file_read(self.file_name)
 
         if json_data:
             json_data = [vac for vac in json_data if vac.get("id") != vacancy.id]
@@ -27,7 +27,7 @@ class JsonSaver(Saver):
 
 
     def get_vacancy(self, vacancy_id: int) -> Optional[Vacancy]:
-        json_data = open_file_read(self.file_name)
+        json_data = self.open_file_read(self.file_name)
 
         if json_data:
             vacancy_data = next((vac for vac in json_data if vac.get("id") == vacancy_id), None)
@@ -38,7 +38,7 @@ class JsonSaver(Saver):
 
 
     def delete_vacancy(self, vacancy_id: int) -> bool:
-        json_data = open_file_read(self.file_name)
+        json_data = self.open_file_read(self.file_name)
 
         if json_data:
             res_data = [vac for vac in json_data if vac.get("id") != vacancy_id]

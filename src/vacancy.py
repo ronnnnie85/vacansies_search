@@ -1,13 +1,17 @@
+from src.config import JOB_TITLE_KEY, LINK_KEY, SALARY_KEY, FROM_SALARY_KEY, SNIPPET_KEY, REQUIREMENT_KEY, \
+    RESPONSIBILITY_KEY, ID_KEY
+
+
 class Vacancy:
     __slots__ = ("__job_title", "__link_to_the_vacancy", "__salary", "__description", "__id")
 
-    __job_title: str  # наименование вакансии
-    __link_to_the_vacancy: str  # ссылка на вакансию
-    __salary: int  # зарплата
-    __description: str  # описание
-    __id: int  # id
+    __job_title: str
+    __link_to_the_vacancy: str
+    __salary: int
+    __description: str
+    __id: int
 
-    def __init__(self, job_title, link_to_the_vacancy, salary, description, id):
+    def __init__(self, job_title: str, link_to_the_vacancy: str, salary: int, description: str, id: int):
         dct_params = {
             "job_title": job_title,
             "link_to_the_vacancy": link_to_the_vacancy,
@@ -38,21 +42,21 @@ class Vacancy:
         """Делаем список объектом"""
         result = []
         for vac in lst_vacancy:
-            job_title = vac.get("name", "")
-            link_to_the_vacancy = vac.get("alternate_url", "")
-            salary = (vac_salary if (vac_salary := vac.get("salary")) is not None else {}).get("from", 0)
-            requirement = (vac_requirement if (vac_requirement := vac.get("snippet")) is not None else {}).get(
-                "requirement", ""
+            job_title = vac.get(JOB_TITLE_KEY, "")
+            link_to_the_vacancy = vac.get(LINK_KEY, "")
+            salary = (vac_salary if (vac_salary := vac.get(SALARY_KEY)) is not None else {}).get(FROM_SALARY_KEY, 0)
+            requirement = (vac_requirement if (vac_requirement := vac.get(SNIPPET_KEY)) is not None else {}).get(
+                REQUIREMENT_KEY, ""
             )
             responsibility = (
-                vac_responsibility if (vac_responsibility := vac.get("snippet")) is not None else {}
-            ).get("responsibility", "")
+                vac_responsibility if (vac_responsibility := vac.get(SNIPPET_KEY)) is not None else {}
+            ).get(RESPONSIBILITY_KEY, "")
             description = (
                 ("\n").join([requirement, responsibility])
                 if requirement is not None and responsibility is not None
                 else ""
             )
-            id = vac.get("id", "")
+            id = vac.get(ID_KEY, "")
             try:
                 vacancy = cls(job_title, link_to_the_vacancy, salary, description, id)
             except ValueError():
@@ -63,7 +67,6 @@ class Vacancy:
 
     @staticmethod
     def __validation(dct_params: dict):
-        """Валидация данных"""
         if not dct_params["job_title"] or not dct_params["id"]:
             return False
         dct_params["link_to_the_vacancy"] = (
@@ -73,58 +76,51 @@ class Vacancy:
         dct_params["description"] = dct_params["description"] if dct_params["description"] else ""
         return True
 
+
     @property
     def job_title(self):
-        """Переопределение"""
         return self.__job_title
 
     @property
     def link_to_the_vacancy(self):
-        """Переопределение"""
         return self.__link_to_the_vacancy
 
     @property
     def salary(self):
-        """Переопределение"""
         return self.__salary
 
     @property
     def description(self):
-        """Переопределение"""
         return self.__description
 
     @property
     def id(self):
-        """Переопределение"""
         return self.__id
 
     def __le__(self, other):
-        """сравнение больше или равно"""
         if isinstance(other, Vacancy):
             return self.__salary <= other.salary
         else:
-            raise TypeError("не совподающие типы данных")
+            raise TypeError("Несовпадающие типы данных")
 
     def __ge__(self, other):
         """сравнение меньше или равно"""
         if isinstance(other, Vacancy):
             return self.__salary >= other.salary
         else:
-            raise TypeError("не совподающие типы данных")
+            raise TypeError("Несовпадающие типы данных")
 
     def __repr__(self):
-        """Вывод информации для разработчика"""
         return (
             f"{self.__class__.__name__}({self.__job_title}, {self.__link_to_the_vacancy}, {self.__salary}, "
             f"{self.__description}, {self.__id})"
         )
 
     def __str__(self):
-        """Вывод информации для пользователя"""
         return (
-            f"ID номер: {self.__id}"
-            f"название вакансии: {self.__job_title}"
-            f"ссылка на вакансию: {self.__link_to_the_vacancy}"
-            f"размер зарплаты: {self.__salary}"
-            f"описание вакансии: {self.__description}"
+            f"ID номер:             {self.__id}"
+            f"Название вакансии:    {self.__job_title}"
+            f"Ссылка на вакансию:   {self.__link_to_the_vacancy}"
+            f"Размер зарплаты:      {self.__salary}"
+            f"Описание вакансии:    {self.__description}"
         )
