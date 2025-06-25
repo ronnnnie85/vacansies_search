@@ -3,10 +3,10 @@ from abc import ABC, abstractmethod
 
 class Parser(ABC):
 
-    @abstractmethod
-    def load_vacancies(self):
+    @abstractmethod # pragma: no cover
+    def load_data(self):
         pass
 
-    @abstractmethod
+    @abstractmethod # pragma: no cover
     def __get_request(self):
         pass
