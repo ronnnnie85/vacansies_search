@@ -72,7 +72,7 @@ class Vacancy:
         dct_params["link_to_the_vacancy"] = (
             dct_params.get("link_to_the_vacancy") if dct_params.get("link_to_the_vacancy") else ""
         )
-        dct_params["salary"] = dct_params.get("salary") if dct_params.get("salary") else 0
+        dct_params["salary"] = dct_params.get("salary") if dct_params.get("salary") > 0 else 0
         dct_params["description"] = dct_params.get("description") if dct_params.get("description") else ""
         return True
 
@@ -122,9 +122,9 @@ class Vacancy:
 
     def __str__(self):
         return (
-            f"ID номер:             {self.__id}"
-            f"Название вакансии:    {self.__job_title}"
-            f"Ссылка на вакансию:   {self.__link_to_the_vacancy}"
-            f"Размер зарплаты:      {self.__salary}"
+            f"ID номер:             {self.__id}\n"
+            f"Название вакансии:    {self.__job_title}\n"
+            f"Ссылка на вакансию:   {self.__link_to_the_vacancy}\n"
+            f"Размер зарплаты:      {self.__salary}\n"
             f"Описание вакансии:    {self.__description}"
         )
