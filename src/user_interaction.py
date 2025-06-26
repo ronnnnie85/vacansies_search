@@ -15,10 +15,11 @@ class UserInteraction:
             hh_parser = HeadHunterAPI()
             vacancy_data = hh_parser.load_data(search_query)
 
-            vacancies = Vacancy.cast_to_object_list(vacancy_data)
-
+            vacancies_main = Vacancy.cast_to_object_list(vacancy_data)
+            vacancies = []
+            vacancies.extend(vacancies_main)
             while True:
-                proc_vacs = vacancies
+
                 print("\nВыберите метод поиска:")
                 print("1) Найти топ вакансий")
                 print("2) Найти вакансии по слову из описания")
@@ -37,15 +38,15 @@ class UserInteraction:
                     except ValueError:
                         print("Ошибка: введите корректное число")
                     else:
-                        result_top = VacProcessing.get_top_vacancies(proc_vacs, n)
+                        result_top = VacProcessing.get_top_vacancies(vacancies, n)
                         print(VacProcessing.print_vacancies(result_top))
-                        self.result_for_next(proc_vacs, result_top)
+                        self.result_for_next(vacancies, result_top)
                 elif user_input.strip() == "2":
                     keyword = self.check_input("Введите ключевое слово для поиска в описании")
 
-                    result_description = VacProcessing.filter_vacancies(proc_vacs, keyword)
+                    result_description = VacProcessing.filter_vacancies(vacancies, keyword)
                     print(VacProcessing.print_vacancies(result_description))
-                    self.result_for_next(proc_vacs, result_description)
+                    self.result_for_next(vacancies, result_description)
                 elif user_input.strip() == "3":
                     range_salary = self.check_input("Введите диапазон зарплат через - ")
                     pattern = re.compile(r'\b(0|[1-9][0-9]*)-([1-9][0-9]*)\b')
@@ -54,15 +55,15 @@ class UserInteraction:
                     if not match:
                         print("Ошибка: введите диапазон корректно")
                     else:
-                        result_range = VacProcessing.get_vacancies_by_salary(proc_vacs, range_salary.strip())
+                        result_range = VacProcessing.get_vacancies_by_salary(vacancies, range_salary.strip())
                         print(VacProcessing.print_vacancies(result_range))
-                        self.result_for_next(proc_vacs, result_range)
+                        self.result_for_next(vacancies, result_range)
                 elif user_input.strip() == "4":
                     ascending_str = self.check_input("Отсортировать по возрастанию?[Y/n]")
                     reverse = ascending_str.lower() != "y"
-                    sorted_vacs = VacProcessing.sort_vacancies(proc_vacs, reverse)
+                    sorted_vacs = VacProcessing.sort_vacancies(vacancies, reverse)
                     print(VacProcessing.print_vacancies(sorted_vacs))
-                    self.result_for_next(proc_vacs, sorted_vacs)
+                    self.result_for_next(vacancies, sorted_vacs)
                 elif user_input == "5":
                     break
                 else:
@@ -77,8 +78,10 @@ class UserInteraction:
     def result_for_next(vacancies: list, result: list) -> None:
         print("Использовать результат для дальнейшей обработки? [Y/n]")
         user_input = input()
+
         if user_input.strip().lower() == "y":
-            vacancies = result
+            vacancies.clear()
+            vacancies.extend(result)
 
     @staticmethod
     def check_input(text: str) -> str:
