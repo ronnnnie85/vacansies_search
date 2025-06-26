@@ -13,7 +13,6 @@ class JsonSaver(Saver):
     def __init__(self, file_name: str = "../data/vacancies.json"):
         self.file_name = file_name
 
-
     def add_vacancy(self, vacancy: Vacancy) -> None:
         json_data = self.open_file_read(self.file_name)
 
@@ -25,7 +24,6 @@ class JsonSaver(Saver):
         with open(self.file_name, "w", encoding="utf-8") as f:
             json.dump(json_data, f, indent=4, ensure_ascii=False)
 
-
     def get_vacancy(self, vacancy_id: int) -> Optional[Vacancy]:
         json_data = self.open_file_read(self.file_name)
 
@@ -35,7 +33,6 @@ class JsonSaver(Saver):
                 return Vacancy(**vacancy_data)
 
         return None
-
 
     def delete_vacancy(self, vacancy_id: int) -> bool:
         json_data = self.open_file_read(self.file_name)
@@ -48,9 +45,8 @@ class JsonSaver(Saver):
             return True
         return False
 
-
     @staticmethod
-    def open_file_read(file_name: str) -> list:
+    def open_file_read(file_name: str) -> Any:
         if os.path.exists(file_name) and os.path.getsize(file_name) > 0:
             try:
                 with open(file_name, "r", encoding="utf-8") as f:

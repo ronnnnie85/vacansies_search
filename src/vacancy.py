@@ -1,5 +1,13 @@
-from src.config import JOB_TITLE_KEY, LINK_KEY, SALARY_KEY, FROM_SALARY_KEY, SNIPPET_KEY, REQUIREMENT_KEY, \
-    RESPONSIBILITY_KEY, ID_KEY
+from src.config import (
+    FROM_SALARY_KEY,
+    ID_KEY,
+    JOB_TITLE_KEY,
+    LINK_KEY,
+    REQUIREMENT_KEY,
+    RESPONSIBILITY_KEY,
+    SALARY_KEY,
+    SNIPPET_KEY,
+)
 
 
 class Vacancy:
@@ -77,7 +85,6 @@ class Vacancy:
         dct_params["description"] = dct_params.get("description", "") if dct_params.get("description", "") else ""
         return True
 
-
     @property
     def job_title(self):
         return self.__job_title
@@ -115,7 +122,7 @@ class Vacancy:
         else:
             raise TypeError("Несовпадающие типы данных")
 
-    def __eq__(self, other: 'Vacancy') -> bool:
+    def __eq__(self, other: "Vacancy") -> bool:
         if isinstance(other, Vacancy):
             return self.__salary == other.salary
         elif isinstance(other, int) or isinstance(other, float):
@@ -123,7 +130,7 @@ class Vacancy:
         else:
             raise TypeError("Несовпадающие типы данных")
 
-    def __ne__(self, other: 'Vacancy') -> bool:
+    def __ne__(self, other: "Vacancy") -> bool:
         if isinstance(other, Vacancy):
             return self.__salary != other.salary
         elif isinstance(other, int) or isinstance(other, float):
@@ -131,7 +138,7 @@ class Vacancy:
         else:
             raise TypeError("Несовпадающие типы данных")
 
-    def __lt__(self, other: 'Vacancy') -> bool:
+    def __lt__(self, other: "Vacancy") -> bool:
         if isinstance(other, Vacancy):
             return self.__salary < other.salary
         elif isinstance(other, int) or isinstance(other, float):
@@ -139,7 +146,7 @@ class Vacancy:
         else:
             raise TypeError("Несовпадающие типы данных")
 
-    def __gt__(self, other: 'Vacancy') -> bool:
+    def __gt__(self, other: "Vacancy") -> bool:
         if isinstance(other, Vacancy):
             return self.__salary > other.salary
         elif isinstance(other, int) or isinstance(other, float):

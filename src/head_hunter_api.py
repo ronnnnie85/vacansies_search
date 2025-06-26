@@ -2,7 +2,7 @@ from typing import Optional
 
 import requests
 
-from src.config import HEADERS, PARAMS, URL, SEARCH_TEXT_KEY, PAGE_KEY, DATA_KEY
+from src.config import DATA_KEY, HEADERS, PAGE_KEY, PARAMS, SEARCH_TEXT_KEY, URL
 from src.parser import Parser
 
 

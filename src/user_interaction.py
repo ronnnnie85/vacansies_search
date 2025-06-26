@@ -1,8 +1,8 @@
 import re
 
 from src.head_hunter_api import HeadHunterAPI
-from src.vacancy import Vacancy
 from src.vacancies_processing import VacProcessing
+from src.vacancy import Vacancy
 
 
 class UserInteraction:
@@ -49,7 +49,7 @@ class UserInteraction:
                     self.result_for_next(vacancies, result_description)
                 elif user_input.strip() == "3":
                     range_salary = self.check_input("Введите диапазон зарплат через - ")
-                    pattern = re.compile(r'\b(0|[1-9][0-9]*)-([1-9][0-9]*)\b')
+                    pattern = re.compile(r"\b(0|[1-9][0-9]*)-([1-9][0-9]*)\b")
 
                     match = pattern.fullmatch(range_salary.strip())
                     if not match:
@@ -72,7 +72,6 @@ class UserInteraction:
             resume_input = self.check_input("Ввести новый запрос?[Y/n]")
             if resume_input.lower() != "y":
                 break
-
 
     @staticmethod
     def result_for_next(vacancies: list, result: list) -> None:
