@@ -9,9 +9,9 @@ class Vacancy:
     __link_to_the_vacancy: str
     __salary: int
     __description: str
-    __id: int
+    __id: str
 
-    def __init__(self, job_title: str, link_to_the_vacancy: str, salary: int, description: str, id: int):
+    def __init__(self, job_title: str, link_to_the_vacancy: str, salary: int, description: str, id: str):
         dct_params = {
             "job_title": job_title,
             "link_to_the_vacancy": link_to_the_vacancy,
@@ -39,7 +39,7 @@ class Vacancy:
 
     @classmethod
     def cast_to_object_list(cls, lst_vacancy):
-        """Делаем список объектом"""
+
         result = []
         for vac in lst_vacancy:
             job_title = vac.get(JOB_TITLE_KEY, "")
@@ -52,7 +52,7 @@ class Vacancy:
                 vac_responsibility if (vac_responsibility := vac.get(SNIPPET_KEY)) is not None else {}
             ).get(RESPONSIBILITY_KEY, "")
             description = (
-                ("\n").join([requirement, responsibility])
+                ("\n").join([responsibility, requirement])
                 if requirement is not None and responsibility is not None
                 else ""
             )
@@ -70,10 +70,11 @@ class Vacancy:
         if not dct_params.get("job_title") or not dct_params.get("id"):
             return False
         dct_params["link_to_the_vacancy"] = (
-            dct_params.get("link_to_the_vacancy") if dct_params.get("link_to_the_vacancy") else ""
+            dct_params.get("link_to_the_vacancy", "") if dct_params.get("link_to_the_vacancy", "") else ""
         )
+        dct_params["salary"] = dct_params.get("salary") if dct_params.get("salary") else 0
         dct_params["salary"] = dct_params.get("salary") if dct_params.get("salary") > 0 else 0
-        dct_params["description"] = dct_params.get("description") if dct_params.get("description") else ""
+        dct_params["description"] = dct_params.get("description", "") if dct_params.get("description", "") else ""
         return True
 
 
@@ -111,6 +112,38 @@ class Vacancy:
             return self.__salary >= other.salary
         elif isinstance(other, int) or isinstance(other, float):
             return self.__salary >= other
+        else:
+            raise TypeError("Несовпадающие типы данных")
+
+    def __eq__(self, other: 'Vacancy') -> bool:
+        if isinstance(other, Vacancy):
+            return self.__salary == other.salary
+        elif isinstance(other, int) or isinstance(other, float):
+            return self.__salary == other
+        else:
+            raise TypeError("Несовпадающие типы данных")
+
+    def __ne__(self, other: 'Vacancy') -> bool:
+        if isinstance(other, Vacancy):
+            return self.__salary != other.salary
+        elif isinstance(other, int) or isinstance(other, float):
+            return self.__salary != other
+        else:
+            raise TypeError("Несовпадающие типы данных")
+
+    def __lt__(self, other: 'Vacancy') -> bool:
+        if isinstance(other, Vacancy):
+            return self.__salary < other.salary
+        elif isinstance(other, int) or isinstance(other, float):
+            return self.__salary < other
+        else:
+            raise TypeError("Несовпадающие типы данных")
+
+    def __gt__(self, other: 'Vacancy') -> bool:
+        if isinstance(other, Vacancy):
+            return self.__salary > other.salary
+        elif isinstance(other, int) or isinstance(other, float):
+            return self.__salary > other
         else:
             raise TypeError("Несовпадающие типы данных")
 

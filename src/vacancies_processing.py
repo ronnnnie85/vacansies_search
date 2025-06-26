@@ -8,7 +8,7 @@ class VacProcessing:
 
     @classmethod
     def sort_vacancies(cls, vacancies_list: list, reverse: bool = False) -> list:
-        return sorted(vacancies_list, key=lambda x: x, reverse=reverse)
+        return sorted(vacancies_list, reverse=reverse)
 
     @classmethod
     def print_vacancies(cls, vacancies_list: list) -> str:
