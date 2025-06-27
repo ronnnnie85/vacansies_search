@@ -42,10 +42,20 @@ def sample_vacancy_data():
 
 @pytest.fixture
 def sample_vacancies():
-    """Фикстура с тестовыми вакансиями"""
     return [
         Vacancy("Junior", "link1", 50000, "desc1", "1"),
         Vacancy("Junior1", "link1", 50000, "desc1", "4"),
         Vacancy("Middle", "link2", 100000, "desc2", "2"),
         Vacancy("Senior", "link3", 150000, "desc3", "3"),
+    ]
+
+
+@pytest.fixture
+def sample_vacancies_work():
+    return [
+        Vacancy("Python Developer", "http://example.com/1", 100000, "Разработка на Python", "1"),
+        Vacancy("Java Developer", "http://example.com/2", 90000, "Разработка на Java", "2"),
+        Vacancy("Data Scientist", "http://example.com/3", 120000, "Анализ данных и машинное обучение", "3"),
+        Vacancy("DevOps Engineer", "http://example.com/4", 110000, "Настройка CI/CD", "4"),
+        Vacancy("Frontend Developer", "http://example.com/5", 95000, "Разработка на React", "5"),
     ]
