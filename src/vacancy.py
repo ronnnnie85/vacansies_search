@@ -17,7 +17,7 @@ class Vacancy:
     __link_to_the_vacancy: str
     __salary: int
     __description: str
-    __id: str
+    __id: int
 
     def __init__(self, job_title: str, link_to_the_vacancy: str, salary: int, description: str, id: str):
         dct_params = {
@@ -155,7 +155,8 @@ class Vacancy:
 
     def __repr__(self):
         return (
-            f"{self.__class__.__name__}({self.__job_title}, {self.__link_to_the_vacancy}, {self.__salary}, "
+            f"{self.__class__.__name__}({self.__job_title}, {self.__link_to_the_vacancy}, "
+            f"{self.__salary}, "
             f"{self.__description}, {self.__id})"
         )
 
