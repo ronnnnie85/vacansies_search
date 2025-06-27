@@ -1,5 +1,15 @@
-from src.config import (FROM_SALARY_KEY, ID_KEY, JOB_TITLE_KEY, LINK_KEY, REQUIREMENT_KEY, RESPONSIBILITY_KEY,
-                        SALARY_KEY, SNIPPET_KEY)
+from typing import Any
+
+from src.config import (
+    FROM_SALARY_KEY,
+    ID_KEY,
+    JOB_TITLE_KEY,
+    LINK_KEY,
+    REQUIREMENT_KEY,
+    RESPONSIBILITY_KEY,
+    SALARY_KEY,
+    SNIPPET_KEY,
+)
 
 
 class Vacancy:
@@ -41,7 +51,7 @@ class Vacancy:
         }
 
     @classmethod
-    def cast_to_object_list(cls, lst_vacancy: list):
+    def cast_to_object_list(cls, lst_vacancy: list) -> list:
         """Преобразует список словарей с данными вакансий в список объектов Vacancy."""
         result = []
         for vac in lst_vacancy:
@@ -69,7 +79,7 @@ class Vacancy:
         return result
 
     @staticmethod
-    def __validation(dct_params: dict)  -> bool:
+    def __validation(dct_params: dict) -> bool:
         """Проверяет валидность параметров вакансии."""
         if not dct_params.get("job_title") or not dct_params.get("id"):
             return False
@@ -82,31 +92,31 @@ class Vacancy:
         return True
 
     @property
-    def job_title(self):
+    def job_title(self) -> str:
         """Возвращает название вакансии."""
         return self.__job_title
 
     @property
-    def link_to_the_vacancy(self):
+    def link_to_the_vacancy(self) -> str:
         """Возвращает ссылку на вакансию."""
         return self.__link_to_the_vacancy
 
     @property
-    def salary(self):
+    def salary(self) -> int:
         """Возвращает зарплату."""
         return self.__salary
 
     @property
-    def description(self):
+    def description(self) -> str:
         """Возвращает описание вакансии."""
         return self.__description
 
     @property
-    def id(self):
+    def id(self) -> int:
         """Возвращает идентификатор вакансии."""
         return self.__id
 
-    def __le__(self, other):
+    def __le__(self, other: Any) -> Any:
         """Сравнивает вакансии по зарплате (меньше или равно)."""
         if isinstance(other, Vacancy):
             return self.__salary <= other.salary
@@ -115,7 +125,7 @@ class Vacancy:
         else:
             raise TypeError("Несовпадающие типы данных")
 
-    def __ge__(self, other):
+    def __ge__(self, other: Any) -> Any:
         """Сравнивает вакансии по зарплате (больше или равно)."""
         if isinstance(other, Vacancy):
             return self.__salary >= other.salary
@@ -124,7 +134,7 @@ class Vacancy:
         else:
             raise TypeError("Несовпадающие типы данных")
 
-    def __eq__(self, other: "Vacancy") -> bool:
+    def __eq__(self, other: Any) -> Any:
         """Сравнивает вакансии по зарплате (равно)."""
         if isinstance(other, Vacancy):
             return self.__salary == other.salary
@@ -133,7 +143,7 @@ class Vacancy:
         else:
             raise TypeError("Несовпадающие типы данных")
 
-    def __ne__(self, other: "Vacancy") -> bool:
+    def __ne__(self, other: Any) -> Any:
         """Сравнивает вакансии по зарплате (не равно)."""
         if isinstance(other, Vacancy):
             return self.__salary != other.salary
@@ -142,7 +152,7 @@ class Vacancy:
         else:
             raise TypeError("Несовпадающие типы данных")
 
-    def __lt__(self, other: "Vacancy") -> bool:
+    def __lt__(self, other: Any) -> Any:
         """Сравнивает вакансии по зарплате (меньше)."""
         if isinstance(other, Vacancy):
             return self.__salary < other.salary
@@ -151,7 +161,7 @@ class Vacancy:
         else:
             raise TypeError("Несовпадающие типы данных")
 
-    def __gt__(self, other: "Vacancy") -> bool:
+    def __gt__(self, other: Any) -> Any:
         """Сравнивает вакансии по зарплате (больше)."""
         if isinstance(other, Vacancy):
             return self.__salary > other.salary
@@ -160,7 +170,7 @@ class Vacancy:
         else:
             raise TypeError("Несовпадающие типы данных")
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Возвращает строковое представление объекта для отладки."""
         return (
             f"{self.__class__.__name__}({self.__job_title}, {self.__link_to_the_vacancy}, "
@@ -168,7 +178,7 @@ class Vacancy:
             f"{self.__description}, {self.__id})"
         )
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Возвращает строковое представление вакансии для пользователя."""
         return (
             f"ID номер:             {self.__id}\n"

@@ -34,7 +34,7 @@ class HeadHunterAPI(Parser):
         self.__params[PAGE_KEY] = 0
         return self.__vacancies
 
-    def __get_request(self) -> Optional[requests.Response]:
+    def _Parser__get_request(self) -> Optional[requests.Response]:
         """Отправляет GET-запрос к API и возвращает ответ."""
         try:
             response = requests.get(self.__url, headers=self.__headers, params=self.__params)
