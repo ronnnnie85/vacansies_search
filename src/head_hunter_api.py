@@ -14,7 +14,7 @@ class HeadHunterAPI(Parser):
     __params: dict
     __vacancies: list
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Инициализирует экземпляр класса с настройками для запросов к API."""
         self.__url = URL
         self.__headers = HEADERS
@@ -34,7 +34,7 @@ class HeadHunterAPI(Parser):
         self.__params[PAGE_KEY] = 0
         return self.__vacancies
 
-    def _Parser__get_request(self) -> Optional[requests.Response]:
+    def __get_request(self) -> Optional[requests.Response]:
         """Отправляет GET-запрос к API и возвращает ответ."""
         try:
             response = requests.get(self.__url, headers=self.__headers, params=self.__params)

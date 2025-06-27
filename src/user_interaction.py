@@ -8,7 +8,7 @@ from src.vacancy import Vacancy
 class UserInteraction:
     """Класс для взаимодействия с пользователем через консоль."""
 
-    def user_interaction(self):
+    def user_interaction(self) -> None:
         """Основной метод для взаимодействия с пользователем."""
         print("Здравствуйте")
 

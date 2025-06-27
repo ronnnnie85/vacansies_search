@@ -30,7 +30,7 @@ class Vacancy:
         self.__description = dct_params.get("description", "")
         self.__id = int(dct_params.get("id", 0))
 
-    def cast_to_dict(self):
+    def cast_to_dict(self) -> dict:
         """Преобразует вакансию в словарь."""
         return {
             "job_title": self.__job_title,
@@ -41,7 +41,7 @@ class Vacancy:
         }
 
     @classmethod
-    def cast_to_object_list(cls, lst_vacancy):
+    def cast_to_object_list(cls, lst_vacancy: list):
         """Преобразует список словарей с данными вакансий в список объектов Vacancy."""
         result = []
         for vac in lst_vacancy:
@@ -69,7 +69,7 @@ class Vacancy:
         return result
 
     @staticmethod
-    def __validation(dct_params: dict):
+    def __validation(dct_params: dict)  -> bool:
         """Проверяет валидность параметров вакансии."""
         if not dct_params.get("job_title") or not dct_params.get("id"):
             return False
@@ -77,7 +77,7 @@ class Vacancy:
             dct_params.get("link_to_the_vacancy", "") if dct_params.get("link_to_the_vacancy", "") else ""
         )
         dct_params["salary"] = dct_params.get("salary") if dct_params.get("salary") else 0
-        dct_params["salary"] = dct_params.get("salary") if dct_params.get("salary") > 0 else 0
+        dct_params["salary"] = dct_params.get("salary") if dct_params.get("salary", 0) > 0 else 0
         dct_params["description"] = dct_params.get("description", "") if dct_params.get("description", "") else ""
         return True
 
