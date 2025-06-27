@@ -1,13 +1,12 @@
 import json
-from unittest.mock import patch, mock_open
+from unittest.mock import mock_open, patch
 
 from src.json_saver import JsonSaver
 from src.vacancy import Vacancy
 
 
 def test_open_file_read_empty_file():
-    with (patch("os.path.exists") as mock_exists,
-          patch("os.path.getsize") as mock_getsize):
+    with patch("os.path.exists") as mock_exists, patch("os.path.getsize") as mock_getsize:
         mock_exists.return_value = True
         mock_getsize.return_value = 0
 
@@ -18,9 +17,11 @@ def test_open_file_read_empty_file():
 
 def test_open_file_read_non_empty_file():
     test_data = [{"id": 1, "title": "Test"}]
-    with (patch("os.path.exists") as mock_exists,
-          patch("os.path.getsize") as mock_getsize,
-          patch("builtins.open", mock_open(read_data=json.dumps(test_data)))):
+    with (
+        patch("os.path.exists") as mock_exists,
+        patch("os.path.getsize") as mock_getsize,
+        patch("builtins.open", mock_open(read_data=json.dumps(test_data))),
+    ):
         mock_exists.return_value = True
         mock_getsize.return_value = 10
 
@@ -35,7 +36,7 @@ def test_add_vacancy_to_empty_file():
         "job_title": "Python Developer",
         "link_to_the_vacancy": "http://example.com",
         "salary": 100000,
-        "description": "Python developer job"
+        "description": "Python developer job",
     }
     vacancy = Vacancy(**vacancy_data)
 
@@ -70,7 +71,13 @@ def test_get_vacancy_not_exists():
 
 
 def test_get_vacancy_exists():
-    vacancy_data = {"id": 1, "job_title": "Python Developer", "link_to_the_vacancy": "", "salary": 0, "description": ""}
+    vacancy_data = {
+        "id": 1,
+        "job_title": "Python Developer",
+        "link_to_the_vacancy": "",
+        "salary": 0,
+        "description": "",
+    }
     with patch.object(JsonSaver, "open_file_read", return_value=[vacancy_data]):
         saver = JsonSaver("test.json")
         result = saver.get_vacancy(1)
@@ -86,15 +93,15 @@ def test_delete_existing_vacancy():
             "job_title": "To Delete",
             "link_to_the_vacancy": "http://delete.com",
             "salary": 50000,
-            "description": "To be deleted"
+            "description": "To be deleted",
         },
         {
             "id": 2,
             "job_title": "To Keep",
             "link_to_the_vacancy": "http://keep.com",
             "salary": 100000,
-            "description": "Should remain"
-        }
+            "description": "Should remain",
+        },
     ]
 
     written_data = []
@@ -106,8 +113,7 @@ def test_delete_existing_vacancy():
     mock_file = mock_open()
     mock_file.return_value.write = mock_write
 
-    with (patch.object(JsonSaver, "open_file_read", return_value=vacancies),
-        patch("builtins.open", mock_file)):
+    with patch.object(JsonSaver, "open_file_read", return_value=vacancies), patch("builtins.open", mock_file):
         saver = JsonSaver("test.json")
         result = saver.delete_vacancy(1)
 

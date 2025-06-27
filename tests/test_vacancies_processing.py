@@ -16,18 +16,20 @@ def test_sort_vacancies(sample_vacancies_work):
 
 def test_print_vacancies(sample_vacancies_work):
     result = VacProcessing.print_vacancies(sample_vacancies_work[:2])
-    assert result == ("ID номер:             1\n"
-    "Название вакансии:    Python Developer\n"
-    "Ссылка на вакансию:   http://example.com/1\n"
-    "Размер зарплаты:      100000\n"
-    "Описание вакансии:    Разработка на Python\n"
-    "--------------------------------------------------\n"
-    "ID номер:             2\n"
-    "Название вакансии:    Java Developer\n"
-    "Ссылка на вакансию:   http://example.com/2\n"
-    "Размер зарплаты:      90000\n"
-    "Описание вакансии:    Разработка на Java\n"
-    "--------------------------------------------------")
+    assert result == (
+        "ID номер:             1\n"
+        "Название вакансии:    Python Developer\n"
+        "Ссылка на вакансию:   http://example.com/1\n"
+        "Размер зарплаты:      100000\n"
+        "Описание вакансии:    Разработка на Python\n"
+        "--------------------------------------------------\n"
+        "ID номер:             2\n"
+        "Название вакансии:    Java Developer\n"
+        "Ссылка на вакансию:   http://example.com/2\n"
+        "Размер зарплаты:      90000\n"
+        "Описание вакансии:    Разработка на Java\n"
+        "--------------------------------------------------"
+    )
 
 
 def test_filter_vacancies(sample_vacancies_work):

@@ -42,16 +42,17 @@ def test_cast_to_object_list_correct_conversion(sample_vacancy_data):
 
 
 def test_vacancy_repr(vacancy):
-    assert repr(vacancy) == ("Vacancy(Водитель, voditel@vod.ru, 50000, Работа связана с вождением, "
-                             "12345)")
+    assert repr(vacancy) == ("Vacancy(Водитель, voditel@vod.ru, 50000, Работа связана с вождением, " "12345)")
 
 
 def test_vacancy_str(vacancy):
-    assert str(vacancy) == (f"ID номер:             12345\n"
-                            f"Название вакансии:    Водитель\n"
-                            f"Ссылка на вакансию:   voditel@vod.ru\n"
-                            f"Размер зарплаты:      50000\n"
-                            f"Описание вакансии:    Работа связана с вождением")
+    assert str(vacancy) == (
+        f"ID номер:             12345\n"
+        f"Название вакансии:    Водитель\n"
+        f"Ссылка на вакансию:   voditel@vod.ru\n"
+        f"Размер зарплаты:      50000\n"
+        f"Описание вакансии:    Работа связана с вождением"
+    )
 
 
 def test_le(sample_vacancies):
@@ -77,6 +78,7 @@ def test_ne(sample_vacancies):
 def test_lt(sample_vacancies):
     assert sample_vacancies[0] < sample_vacancies[2]
     assert sample_vacancies[0] < 100000
+
 
 def test_gt(sample_vacancies):
     assert sample_vacancies[2] > sample_vacancies[0]
