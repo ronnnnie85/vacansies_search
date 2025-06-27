@@ -1,5 +1,6 @@
 import pytest
 
+from src.head_hunter_api import HeadHunterAPI
 from src.vacancy import Vacancy
 
 
@@ -59,3 +60,8 @@ def sample_vacancies_work():
         Vacancy("DevOps Engineer", "http://example.com/4", 110000, "Настройка CI/CD", "4"),
         Vacancy("Frontend Developer", "http://example.com/5", 95000, "Разработка на React", "5"),
     ]
+
+
+@pytest.fixture
+def hh_api():
+    return HeadHunterAPI()
