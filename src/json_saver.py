@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Optional
+from typing import Optional, Any
 
 from src.saver import Saver
 from src.vacancy import Vacancy
