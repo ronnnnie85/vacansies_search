@@ -36,7 +36,6 @@ class Vacancy:
         self.__id = int(dct_params.get("id", 0))
 
     def cast_to_dict(self):
-        """Делаем объект словарем"""
         return {
             "job_title": self.__job_title,
             "link_to_the_vacancy": self.__link_to_the_vacancy,
