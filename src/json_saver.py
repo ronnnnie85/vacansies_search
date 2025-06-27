@@ -1,19 +1,22 @@
 import json
 import os
-from typing import Optional, Any
+from typing import Any, Optional
 
 from src.saver import Saver
 from src.vacancy import Vacancy
 
 
 class JsonSaver(Saver):
+    """Класс для сохранения вакансий в JSON-файл, наследующийся от абстрактного класса Saver."""
 
     file_name: str
 
     def __init__(self, file_name: str = "../data/vacancies.json"):
+        """Инициализирует экземпляр класса с указанием имени файла."""
         self.file_name = file_name
 
     def add_vacancy(self, vacancy: Vacancy) -> None:
+        """Добавляет вакансию в JSON-файл."""
         json_data = self.open_file_read(self.file_name)
 
         if json_data:
@@ -25,6 +28,7 @@ class JsonSaver(Saver):
             json.dump(json_data, f, indent=4, ensure_ascii=False)
 
     def get_vacancy(self, vacancy_id: int) -> Optional[Vacancy]:
+        """Возвращает вакансию по её ID."""
         json_data = self.open_file_read(self.file_name)
 
         if json_data:
@@ -35,6 +39,7 @@ class JsonSaver(Saver):
         return None
 
     def delete_vacancy(self, vacancy_id: int) -> bool:
+        """Удаляет вакансию из JSON-файла по её ID."""
         json_data = self.open_file_read(self.file_name)
 
         if json_data:
@@ -47,6 +52,7 @@ class JsonSaver(Saver):
 
     @staticmethod
     def open_file_read(file_name: str) -> Any:
+        """Открывает файл для чтения и возвращает его содержимое."""
         if os.path.exists(file_name) and os.path.getsize(file_name) > 0:
             try:
                 with open(file_name, "r", encoding="utf-8") as f:

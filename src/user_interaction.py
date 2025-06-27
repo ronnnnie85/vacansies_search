@@ -6,7 +6,10 @@ from src.vacancy import Vacancy
 
 
 class UserInteraction:
+    """Класс для взаимодействия с пользователем через консоль."""
+
     def user_interaction(self):
+        """Основной метод для взаимодействия с пользователем."""
         print("Здравствуйте")
 
         while True:
@@ -75,6 +78,7 @@ class UserInteraction:
 
     @staticmethod
     def result_for_next(vacancies: list, result: list) -> None:
+        """Предлагает пользователю использовать результат для дальнейшей обработки."""
         print("Использовать результат для дальнейшей обработки? [Y/n]")
         user_input = input()
 
@@ -84,6 +88,7 @@ class UserInteraction:
 
     @staticmethod
     def check_input(text: str) -> str:
+        """Проверяет ввод пользователя на пустоту."""
         while True:
             print(text)
             user_input = input()
