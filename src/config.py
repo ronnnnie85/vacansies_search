@@ -1,0 +1,14 @@
+URL = "https://api.hh.ru/vacancies"
+HEADERS = {"User-Agent": "HH-User-Agent"}
+PARAMS = {"text": "", "page": 0, "per_page": 100, "search_field": "name", "area": "113"}
+SEARCH_TEXT_KEY = "text"
+DATA_KEY = "items"
+PAGE_KEY = "page"
+JOB_TITLE_KEY = "name"
+LINK_KEY = "alternate_url"
+SALARY_KEY = "salary"
+FROM_SALARY_KEY = "from"
+SNIPPET_KEY = "snippet"
+REQUIREMENT_KEY = "requirement"
+RESPONSIBILITY_KEY = "responsibility"
+ID_KEY = "id"
